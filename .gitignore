@@ -303,4 +303,6 @@ pyrightconfig.json
 .ionide
 .idea
 
+.json
+
 

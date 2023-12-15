@@ -21,9 +21,18 @@ class TgBot:
 class RedisConfig:
     host: str
 
+
 @dataclass
 class Parser:
     cfsrtoken: str
+
+
+@dataclass
+class GoogleCalendar:
+    scopes: str
+    filepath: str
+    calendar_id: str
+
 
 @dataclass
 class Config:
@@ -31,8 +40,7 @@ class Config:
     db: DatabaseConfig
     redis_config: RedisConfig
     parser: Parser
-
-
+    google_calendar: GoogleCalendar
 
 
 # Создаем экземпляр класса Env
@@ -60,6 +68,11 @@ config = Config(
     ),
     parser=Parser(
         cfsrtoken=env('CSRFTOKEN')
+    ),
+    google_calendar=GoogleCalendar(
+        scopes=env("SCOPES"),
+        filepath=env("FILEPATH"),
+        calendar_id=env("CALENDAR_ID")
     )
 )
 
@@ -86,6 +99,11 @@ def load_config(path: str = ".env") -> Config:
 
         parser=Parser(
             cfsrtoken=env('CSRFTOKEN')
+        ),
+        google_calendar=GoogleCalendar(
+            scopes=env("SCOPES"),
+            filepath=env("FILEPATH"),
+            calendar_id=env("CALENDAR_ID")
         )
     )
 
